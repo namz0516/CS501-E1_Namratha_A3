@@ -4,15 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
-import com.namratha.campuseventexplorer.data.EventRepository
-import com.namratha.campuseventexplorer.ui.EventListScreen
+import com.namratha.campuseventexplorer.navigation.AppNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                EventListScreen(events = EventRepository.events)
+                AppNavigation()
             }
         }
     }
