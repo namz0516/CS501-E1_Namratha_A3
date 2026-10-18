@@ -8,6 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.namratha.campuseventexplorer.data.CampusEvent
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.rememberScrollState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,9 +31,13 @@ fun EventDetailScreen(
         )
     }) { padding ->
         Column(
-            modifier = Modifier.fillMaxSize().padding(padding).padding(20.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .verticalScroll(rememberScrollState())
+                .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        ){
             if (event == null) {
                 Text("Event unavailable", style = MaterialTheme.typography.headlineMedium)
                 Button(onClick = onBack) { Text("Return to events") }
@@ -40,8 +48,16 @@ fun EventDetailScreen(
                 Text("Location: ${event.location}")
                 Text("About this event", style = MaterialTheme.typography.titleLarge)
                 Text(event.description)
-                // The Share action is implemented in Commit 3.
-                Button(onClick = onShare, enabled = false) { Text("Share event") }
+
+                //share action
+                Button(
+                    onClick = onShare,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    )
+                ) {
+                    Text("Share event")
+                }
             }
         }
     }

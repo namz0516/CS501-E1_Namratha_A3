@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="app_name">Campus Event Explorer</string>
+        <string name="search_events">Search events</string>
+        <string name="no_matching_events">No matching events</string>
+        <string name="location_label">Location: %1$s</string>
+        <string name="time_label">Time: %1$s</string>
+        <string name="share_event">Share event</string>
+        <string name="event_unavailable">Event unavailable</string>
+        <string name="return_to_events">Return to events</string>
+        <string name="category_label">Category: %1$s</string>
+        <string name="description_label">Description</string>
+</resources>

@@ -1,5 +1,8 @@
 package com.namratha.campuseventexplorer.navigation
 
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
+
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.compose.NavHost
@@ -13,6 +16,7 @@ import com.namratha.campuseventexplorer.ui.EventListScreen
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    val context = LocalContext.current
     var query by rememberSaveable { mutableStateOf("") }
 
     NavHost(navController = navController, startDestination = EventList) {
@@ -34,7 +38,16 @@ fun AppNavigation() {
             EventDetailScreen(
                 event = event,
                 onBack = { navController.popBackStack() },
-                onShare = {} // Added in Commit 3.
+                onShare = {
+                    if (event != null) {
+                        val message = "${event.title} — ${event.time} — ${event.location}"
+                        val intent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, message)
+                        }
+                        context.startActivity(Intent.createChooser(intent, "Share event"))
+                    }
+                }
             )
         }
     }
